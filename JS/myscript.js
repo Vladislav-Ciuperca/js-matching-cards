@@ -107,7 +107,6 @@ playBtn.addEventListener("click", function () {
 });
 
 
-
 // algpritmo fisher-yates per mescolare array
 function shuffleArray(arr) {
     for (let i = arr.length - 1; i > 0; i--) {
