@@ -1,11 +1,11 @@
-*{
+* {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
     font-family: Geneva, Verdana, sans-serif;
 }
 
-.container{
+.container {
     border: 2px dashed blue;
     width: 100vw;
     height: 100vh;
@@ -13,28 +13,29 @@
     position: relative;
 }
 
-.flexed{
+.flexed {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.boxed{
+.boxed {
     border: 2px dashed orange;
     background: rgba(255, 166, 0, 0.555);
     padding: 2rem;
 }
 
-.menu_container{
+.menu_container {
     position: absolute;
     top: 50%;
     transform: translate(0, -50%);
     left: 5rem;
     min-height: 20rem;
     text-align: center;
+    background: rgb(224, 224, 224);
 }
 
-button{
+button {
     padding: 1rem;
     width: 5rem;
     border-radius: 20px;
@@ -42,19 +43,24 @@ button{
     cursor: pointer;
 }
 
-#game_container{
+#game_container {
     padding: 2rem;
-    width: 500px;
-    height: 300px;
+    /* min-width: 688px;
+   min-height: 688px; */
+
+   /* width: calc(400px + (400px * 0.16 * 2)); */
+   aspect-ratio: 1;
+   
     display: flex;
-    align-items: start;
+    flex-direction: column;
+    /* align-items: start;
     align-content: start;
-    flex-wrap: wrap;
+    flex-wrap: wrap; */
     gap: 10px;
 }
 
 
-.square{
+.square {
     border: 2px dashed orangered;
     background: white;
     width: calc(100% / 4 - 10px);
@@ -64,7 +70,48 @@ button{
     border-radius: 15px;
 }
 
-.disabled{
+.disabled {
     pointer-events: none;
-   cursor: pointer;
+    cursor: pointer;
+}
+
+.ez {
+    border: 2px dashed rgb(223, 76, 179);
+    background: rgba(241, 139, 156, 0.5);
+}
+
+.md {
+    border: 2px dashed green;
+    background: rgba(0, 128, 0, 0.5);
+}
+
+.hd {
+    border: 2px dashed rgb(255, 39, 39);
+    background: rgba(255, 2, 44, 0.5);
+}
+
+.diff {
+    filter: brightness(.5);
+    transition: .5s;
+}
+
+.intern{
+    transform: scaley(-1);
+}
+
+.active {
+    filter: brightness(1);
+
+}
+
+#notify{
+    padding-top: 2rem;
+    font-weight: 600;
+}
+
+.row{
+    border: 2px dashed blue;
+    display: flex;
+    justify-items: start;
+    gap: 10px;
 }
