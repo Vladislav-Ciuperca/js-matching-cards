@@ -54,7 +54,7 @@ button {
 
 
 .square {
-    background: white;
+    background: red;
     transform: scale(0);
     aspect-ratio: 1;
     cursor: pointer;
@@ -71,7 +71,7 @@ button {
 }
 
 .appear{
-    font-size: 60px;
+    font-size: 2rem ;
 }
 
 .disabled {
