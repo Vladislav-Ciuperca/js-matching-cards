@@ -90,11 +90,16 @@ playBtn.addEventListener("click", function () {
 
         shuffledEmojis = shuffleArray(playingEmojis)
         console.log(shuffledEmojis);
-
+        [...diffBtns].forEach(element => {
+            element.classList.add("disabled")
+        });
         playBtn.classList.add("disabled")
         setTimeout(() => {
-            playBtn.classList.remove("disabled")
-        }, animationTimer * 3);
+            playBtn.classList.remove("disabled");
+            [...diffBtns].forEach(element => {
+                element.classList.remove("disabled")
+            });
+        }, animationTimer * 7);
 
         growingSquares = []
         allSquares = []
@@ -103,9 +108,9 @@ playBtn.addEventListener("click", function () {
         let toMatchImage = ""
         blockedElements = []
 
-        for (let z = 0; z < (squaresNum / 2); z++) {
-        }
-        // shuffledEmojis = shuffleArray(arrayEmojis)
+        // for (let z = 0; z < (squaresNum / 2); z++) {
+        // }
+        // // shuffledEmojis = shuffleArray(arrayEmojis)
 
         gameContainer.innerHTML = ""
 
@@ -150,23 +155,138 @@ playBtn.addEventListener("click", function () {
             }
             getSquare()
 
-
-            setTimeout(() => {
-                [...allSquares].forEach(element => {
-                    element.classList.add("appear")
-                });
-            }, 1100 + (squaresNum * 10));
-
-            setTimeout(() => {
-                [...allSquares].forEach(element => {
-                    element.classList.remove("appear")
-                });
-            }, 3000);
-
         }
 
+        setTimeout(() => {
+            [...allSquares].forEach(element => {
+                element.classList.add("appear")
+            });
+        }, 1100 + (squaresNum * 10));
 
 
+        setTimeout(() => {
+            [...allSquares].forEach(element => {
+                element.classList.remove("appear")
+            });
+        }, 3000);
+
+        ///////////////////////=====///////////////////////
+        setTimeout(() => {
+            [...allSquares].forEach((element, x) => {
+
+                element.classList.remove("disabled")
+                element.innerHTML = ""
+
+                //-----// qui quando clicco su n sqr //-----//
+                element.addEventListener("click", function () {
+                    element.classList.add("disabled", "appear")
+                    element.innerHTML = shuffledEmojis[x]
+                })
+            });
+        }, 3300);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //         ///////////////////////////////////////
+        //         setTimeout(() => {
+        //             [...allSquares].forEach((element, x) => {
+        //                 element.classList.remove("appear")
+        //                 setTimeout(() => {
+        //                     element.innerHTML = ""
+        //                 }, 500);
+        //                 //-----// qua logica di gioco //-----//
+        //                 setTimeout(() => {
+        //                     element.classList.remove("disabled")
+        // ///////////////////////=====////////////////////
+        //                     element.addEventListener("click", function () {
+        //                         element.classList.add("appear", "disabled")
+        //                         element.innerHTML = shuffledEmojis[x]
+        //                         clickIndex++
+
+        //                         //-----// al primo click //-----//
+        //                         if (clickIndex == 1) {
+        //                             toMatchImage = shuffledEmojis[x]
+        //                             tempIndex = x
+
+        //                         }
+        //                         //-----// al secondo click //-----//
+        //                         else if (clickIndex == 2) {
+
+        //                             // [...allSquares].forEach(element => {
+        //                             //     element.classList.add("disabled")
+        //                             // });
+        //                             //-----// se matchano //-----//
+        //                             if (shuffledEmojis[x] == toMatchImage) {
+        //                                 score++
+        //                                 clickIndex = 0;
+        //                                 // [...allSquares].forEach(element => {
+        //                                 //     element.classList.remove("disabled")
+        //                                 // });
+        //                                 // mi salvo gli elementi da mantenere disattivati
+        //                                 blockedElements.push(x)
+        //                                 blockedElements.push(tempIndex)
+        //                             }
+        //                             // se non matchano
+        //                             else {
+        //                                 clickIndex = 0;
+        //                                 [...allSquares].forEach(element => {
+        //                                     element.classList.add("disabled")
+        //                                 });
+        //                                 setTimeout(() => {
+        //                                     [...allSquares].forEach(element => {
+        //                                         element.classList.remove("disabled")
+        //                                     });
+        //                                     element.classList.remove("appear")
+        //                                     allSquares[tempIndex].classList.remove("appear")
+        //                                     setTimeout(() => {
+        //                                         element.innerHTML = ""
+        //                                         allSquares[tempIndex].innerHTML = "";
+
+        //                                         blockedElements.forEach(debug => {
+        //                                             console.log(allSquares[debug]);
+        //                                             allSquares[debug].classList.add("disabled")
+
+        //                                         });
+        //                                     }, 500);
+
+        //                                 }, 500);
+        //                             }
+
+
+        //                             // blockedElements.forEach(debug => {
+        //                             //     console.log(allSquares[debug]);
+        //                             //     allSquares[debug].classList.add("disabled")
+
+        //                             // });
+
+        //                         }
+
+        //                         if (score == (arrayEmojis.length / 2)) {
+        //                             console.log("HAI VINTO");
+
+        //                         }
+
+        //                     })
+
+        //                 })
+
+        //             }, 500);
+        //         }, 3000)
+
+        ////////////////////////////////////
 
         for (let x = 0; x < rootNum; x++) {
             setTimeout(() => {
@@ -174,87 +294,6 @@ playBtn.addEventListener("click", function () {
             }, x * timeoutGeneral);
         }
 
-
-
-
-
-
-
-        // for (let i = 0; i < shuffledEmojis.length; i++) {
-
-        //     emoji = shuffledEmojis[i]
-
-        //     /////////////////////////////////////////////////////////////////////////////
-        //     gameContainer.innerHTML += `<div class="square flexed disabled">${emoji}</div>`
-        //     /////////////////////////////////////////////////////////////////////////////
-
-
-        //     let squares = document.getElementsByClassName("square");
-
-
-        //     [...squares].forEach((singleSquare, x) => {
-        //         setTimeout(() => {
-        //             singleSquare.innerHTML = ""
-        //             singleSquare.classList.remove("disabled")
-        //         }, 1000);
-        //         singleSquare.addEventListener("click", function () {
-        //             singleSquare.classList.add("disabled")
-        //             singleSquare.innerHTML = shuffledEmojis[x]
-        //             clickIndex++
-
-        //             //-----// al primo click //-----//
-        //             if (clickIndex == 1) {
-        //                 toMatchImage = shuffledEmojis[x]
-        //                 tempIndex = x
-        //             }
-        //             //-----// al secondo click //-----//
-        //             else if (clickIndex == 2) {
-        //                 [...squares].forEach(element => {
-        //                     element.classList.add("disabled")
-        //                 });
-        //                 //-----// se matchano //-----//
-        //                 if (shuffledEmojis[x] == toMatchImage) {
-        //                     score++
-        //                     clickIndex = 0;
-        //                     [...squares].forEach(element => {
-        //                         element.classList.remove("disabled")
-        //                     });
-        //                     // mi salvo gli elementi da mantenere disattivati
-        //                     blockedElements.push(x)
-        //                     blockedElements.push(tempIndex)
-
-        //                     console.log(blockedElements);
-        //                 }
-        //                 // se non matchano
-        //                 else {
-        //                     clickIndex = 0
-        //                     setTimeout(() => {
-        //                         singleSquare.innerHTML = ""
-        //                         squares[tempIndex].innerHTML = "";
-        //                         [...squares].forEach(element => {
-        //                             element.classList.remove("disabled")
-        //                         });
-        //                     }, 500);
-        //                 }
-
-
-        //                 blockedElements.forEach(debug => {
-        //                     console.log(squares[debug]);
-
-        //                     squares[debug].classList.add("disabled")
-        //                 });
-
-        //             }
-
-        //             if (score == (arrayEmojis.length / 2)) {
-        //                 console.log("HAI VINTO");
-
-        //             }
-
-        //         })
-        //     });
-
-        // }
     }
 
 });

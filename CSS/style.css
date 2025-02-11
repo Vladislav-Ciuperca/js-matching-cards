@@ -54,14 +54,14 @@ button {
 
 
 .square {
-    background: red;
+    background: white;
     transform: scale(0);
     aspect-ratio: 1;
     cursor: pointer;
     /* font-size: 60px; */
     border-radius: 15px;
     width: 100px;
-    transition: .5s;
+    transition: .3s;
     user-select: none;
     font-size: 0;
 }
@@ -71,7 +71,8 @@ button {
 }
 
 .appear{
-    font-size: 2rem ;
+    font-size: 3.2rem!important;
+    transition: .2s;
 }
 
 .disabled {
