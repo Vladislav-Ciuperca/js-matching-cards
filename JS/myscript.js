@@ -190,6 +190,14 @@ playBtn.addEventListener("click", function () {
                         if (shuffledEmojis[x] == toMatchImage) {
                             console.log("trovatpo");
                             clickIndex = 0
+                            setTimeout(() => {
+                                singleImage.classList.add("pulse")
+                                allSquares[tempIndex].classList.add("pulse")
+                            }, 100);
+                            setTimeout(() => {
+                                singleImage.classList.remove("pulse")
+                                allSquares[tempIndex].classList.remove("pulse")
+                            }, 600);
                             // mi pusho gli elementi da mantenere bloccati ad ogni ciclo
                             blockedElements.push(x)
                             blockedElements.push(tempIndex)
@@ -206,7 +214,7 @@ playBtn.addEventListener("click", function () {
                             }, 500);
                             setTimeout(() => {
                                 [...allSquares].forEach(element => {
-                                    element.classList.remove("disabled")
+                                    element.classList.remove("disabled","pulse")
                                 });
                                 blockedElements.forEach(element => {
                                     allSquares[element].classList.add("disabled")

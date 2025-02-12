@@ -71,7 +71,7 @@ button {
 }
 
 .appear{
-    font-size: 3.2rem!important;
+    font-size: 3.2rem;
     transition: .2s;
 }
 
@@ -119,4 +119,22 @@ button {
     display: flex;
     justify-items: start;
     gap: 12px;
+}
+
+@keyframes pulse{
+    10%{
+        font-size: 3.2rem;
+
+    }
+    50%{
+        font-size: 3.5rem;
+    }
+    100%{
+        font-size: 3.2rem;
+
+    }
+}
+
+.pulse{
+    animation: pulse .5s ease-in-out;
 }
