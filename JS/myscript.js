@@ -39,6 +39,8 @@ let playBtn = document.getElementById("play");
 let notify = document.getElementById("notify");
 let diffBtns = document.getElementsByClassName("diff")
 let gameContainer = document.getElementById("game_container");
+let menuContainer = document.getElementById("menu_container");
+let showMenu = document.getElementById("show_menu");
 
 let diffLevels = {
     "easy": 16,
@@ -69,8 +71,28 @@ let growingSquares = [];
 
 // click playbtn
 /////////////////////////////////////////////////////////////////////////////
-playBtn.addEventListener("click", function () {
-    /////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////////////////////
+function newGame() {
+    setTimeout(() => {
+        showMenu.classList.add("show")
+        showMenu.classList.remove("shrink")
+    }, 100);
+    setInterval(() => {
+        showMenu.classList.add("animate_show")
+        setTimeout(() => {
+            showMenu.classList.remove("animate_show")
+            setTimeout(() => {
+                showMenu.classList.add("animate_show")
+                setTimeout(() => {
+                    showMenu.classList.remove("animate_show")
+                }, 100);
+            }, 100);
+        }, 100);
+    }, 5000);
+    menuContainer.classList.add("hide_menu")
+    console.log("Asasd");
+    gameContainer.classList.add("grow")
     if (!squaresNum) {
         notify.innerHTML = "SELEZIOAN UNA DIFFICOLTURA"
     }
@@ -169,96 +191,99 @@ playBtn.addEventListener("click", function () {
         }, 3000);
 
         //////////////////=====//////////////////
+        // Funzione playGame che contiene la logica di gioco
+        function playGame(singleImage, x) {
+            singleImage.classList.add("disabled", "appear");
+            singleImage.innerHTML = shuffledEmojis[x];
+            clickIndex++;
+
+            if (clickIndex == 1) {
+                toMatchImage = shuffledEmojis[x];
+                tempIndex = x;
+            } else if (clickIndex == 2) {
+                if (shuffledEmojis[x] == toMatchImage) {
+                    score++;
+                    console.log(score);
+
+                    clickIndex = 0;
+                    setTimeout(() => {
+                        singleImage.classList.add("pulse");
+                        allSquares[tempIndex].classList.add("pulse");
+                    }, 100);
+                    setTimeout(() => {
+                        singleImage.classList.remove("pulse");
+                        allSquares[tempIndex].classList.remove("pulse");
+                    }, 400);
+
+                    blockedElements.push(x);
+                    blockedElements.push(tempIndex);
+                    console.log(blockedElements);
+                } else {
+                    [...allSquares].forEach(element => {
+                        element.classList.add("disabled");
+                    });
+                    setTimeout(() => {
+                        singleImage.classList.remove("appear");
+                        allSquares[tempIndex].classList.remove("appear");
+                    }, 500);
+                    setTimeout(() => {
+                        [...allSquares].forEach(element => {
+                            element.classList.remove("disabled", "pulse");
+                        });
+                        blockedElements.forEach(element => {
+                            allSquares[element].classList.add("disabled");
+                        });
+                        allSquares[tempIndex].classList.remove("disabled");
+                        singleImage.innerHTML = "";
+                        allSquares[tempIndex].innerHTML = "";
+                        clickIndex = 0;
+                    }, 600);
+                }
+
+                if (score == (squaresNum / 2)) {
+                    console.log("you won");
+                    gameContainer.innerHTML += `
+                <div id="subliminal">
+                    <h1>ASSUMETEMI !!</h1>
+                </div>
+                <div id="win_mess" class="disappear">
+                    <div>VOLEVO DIRE</div>
+                    <div>HAI WINTO</div>
+                    <button id="replay">
+                        <div>GIOCA ANCORA</div>
+                    </button>
+                </div>`;
+                    let subliminal = document.getElementById("subliminal");
+                    let winMsg = document.getElementById("win_mess");
+                    let replay = document.getElementById("replay");
+                    setTimeout(() => {
+                        subliminal.classList.add("grow");
+                    }, 50);
+                    setTimeout(() => {
+                        subliminal.classList.add("disappear");
+                        winMsg.classList.remove("disappear");
+                        setTimeout(() => {
+                            winMsg.classList.add("grow");
+                            replay.addEventListener("click", newGame)
+                        }, 50);
+                    }, 500);
+                }
+            }
+        }
+
+        // Modifica dell'event listener per richiamare playGame()
         setTimeout(() => {
             [...allSquares].forEach((singleImage, x) => {
+                singleImage.classList.remove("disabled");
+                singleImage.innerHTML = "";
 
-                singleImage.classList.remove("disabled")
-                singleImage.innerHTML = ""
-
-                /////////////////////////////////=====/////////////////////////////////
-                //-----// qui quando clicco su un sqr //-----//
                 singleImage.addEventListener("click", function () {
-                    singleImage.classList.add("disabled", "appear")
-                    singleImage.innerHTML = shuffledEmojis[x]
-                    clickIndex++
-
-                    if (clickIndex == 1) {
-                        toMatchImage = shuffledEmojis[x]
-                        tempIndex = x
-                    }
-                    else if (clickIndex == 2) {
-                        if (shuffledEmojis[x] == toMatchImage) {
-                            // console.log("trovatpo");
-                            score++
-                            console.log(score);
-
-                            clickIndex = 0
-                            setTimeout(() => {
-                                singleImage.classList.add("pulse")
-                                allSquares[tempIndex].classList.add("pulse")
-                            }, 100);
-                            setTimeout(() => {
-                                singleImage.classList.remove("pulse")
-                                allSquares[tempIndex].classList.remove("pulse")
-                            }, 600);
-                            // mi pusho gli elementi da mantenere bloccati ad ogni ciclo
-                            blockedElements.push(x)
-                            blockedElements.push(tempIndex)
-                            console.log(blockedElements);
-
-                        }
-                        else {
-                            [...allSquares].forEach(element => {
-                                element.classList.add("disabled")
-                            });
-                            setTimeout(() => {
-                                singleImage.classList.remove("appear")
-                                allSquares[tempIndex].classList.remove("appear")
-                            }, 500);
-                            setTimeout(() => {
-                                [...allSquares].forEach(element => {
-                                    element.classList.remove("disabled", "pulse")
-                                });
-                                blockedElements.forEach(element => {
-                                    allSquares[element].classList.add("disabled")
-                                });
-                                allSquares[tempIndex].classList.remove("disabled")
-                                singleImage.innerHTML = ""
-                                allSquares[tempIndex].innerHTML = ""
-                                clickIndex = 0
-                            }, 600);
-                        }
-                        if (score == (squaresNum / 2)) {
-                            console.log("you won");
-                            gameContainer.innerHTML += `<div id="subliminal">
-                                                          <h1>ASSUMIMI !!</h1>
-                                                        </div>`
-                            let subliminal = document.getElementById("subliminal")
-                            setTimeout(() => {
-                                subliminal.classList.add("grow")
-                            }, 50);
-                            setTimeout(() => {
-                                subliminal.classList.remove("grow")
-                                }, 550);
-                            // gameContainer.innerHTML += `   <div id="win_msg flexed">
-                            //                                    <div>VOLEVO DIRE</div>
-                            //                                    <div>HAI WINTO</div>
-                            //                                    <button id="new_game">
-                            //                                        <div>GIOCA ANCORA</div>
-                            //                                    </button>
-                            //                                </div>`
-                        }
-                    }
-
-
-
-
-
-                })
+                    playGame(singleImage, x);
+                });
             });
         }, 3300);
 
-
+        //////////////////////////////////////////////////////////////////
         for (let x = 0; x < rootNum; x++) {
             setTimeout(() => {
                 getGameGrid(x, 1 + (x * rootNum), rootNum)
@@ -267,7 +292,20 @@ playBtn.addEventListener("click", function () {
 
     }
 
-});
+};
+playBtn.addEventListener("click", function () {
+    if (!squaresNum) {
+        notify.innerHTML = "SELEZIOAN UNA DIFFICOLTURA"
+    } else {
+        newGame()
+    }
+})
+
+showMenu.addEventListener("click", function () {
+    showMenu.classList.add("shrink")
+    menuContainer.classList.remove("hide_menu")
+
+})
 
 // algpritmo fisher-yates per mescolare array
 function shuffleArray(arr) {

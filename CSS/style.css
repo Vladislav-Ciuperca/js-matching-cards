@@ -6,7 +6,6 @@
 }
 
 .container {
-    /* border: 2px dashed blue; */
     width: 100vw;
     height: 100vh;
     gap: 5rem;
@@ -19,13 +18,7 @@
     align-items: center;
 }
 
-.boxed {
-    border: 2px solid orange;
-    background: rgba(255, 166, 0, 0.555);
-    padding: 2rem;
-}
-
-.menu_container {
+#menu_container {
     position: absolute;
     top: 50%;
     transform: translate(0, -50%);
@@ -33,6 +26,16 @@
     min-height: 20rem;
     text-align: center;
     background: rgb(224, 224, 224);
+    padding: 2rem;
+    border: 2px solid orange;
+    transition: .3s;
+    z-index: 1;
+    border-radius: 20px;
+    transition: .5s;
+}
+
+h2 {
+    padding-bottom: 2rem;
 }
 
 button {
@@ -52,23 +55,28 @@ button {
     gap: 10px;
     border-radius: 20px;
     position: relative;
+    background: #ffcd71;
+    transform: scale(0);
+    transition: .3s;
+    z-index: 99;
 }
 
 
 .square {
+    border: 2px solid orange;
     background: white;
     transform: scale(0);
     aspect-ratio: 1;
     cursor: pointer;
     border-radius: 15px;
     width: 100px;
-    transition: .3s;
+    transition: .3s ease-in-out;
     user-select: none;
     font-size: 0;
 }
 
 .grow {
-    transform: scale(1)!important;
+    transform: scale(1) !important;
 }
 
 .appear {
@@ -122,44 +130,9 @@ button {
     gap: 12px;
 }
 
-@keyframes pulse {
-    10% {
-        font-size: 3.2rem;
-
-    }
-
-    50% {
-        font-size: 3.5rem;
-    }
-
-    100% {
-        font-size: 3.2rem;
-
-    }
-}
-
 .pulse {
-    animation: pulse .5s ease-in-out;
-}
+    font-size: 3.5rem;
 
-#win_msg {
-    position: absolute;
-    border: 2px solid rgb(211, 211, 211);
-    background: rgba(255, 255, 255, 0.555);
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    font-size: larger;
-    font-weight: 700;
-    transform: scale(0);
-}
-
-.hidden {
-    transform: scale(0);
 }
 
 #new_game {
@@ -189,6 +162,54 @@ button {
     transition: .3s;
 }
 
-.hidden{
-    display: none;
+.disappear {
+    display: none !important;
 }
+
+#win_mess {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.555);
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: larger;
+    font-weight: 700;
+    transform: scale(0);
+    transition: .5s;
+}
+
+
+.hide_menu {
+    left: 45rem !important;
+    top: 50% !important;
+    transform: scale(0) !important;
+}
+
+.fa-caret-left {
+    font-size: 4rem;
+}
+
+#show_menu {
+    color: #fcc45d;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.shrink{
+    transform: scale(0) !important;
+}
+
+.show {
+    transform: scale(1)translate(70px) ;
+}
+.animate_show {
+    transform: scale(1)translate(60px) ;
+}
+
+
