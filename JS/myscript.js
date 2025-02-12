@@ -188,7 +188,10 @@ playBtn.addEventListener("click", function () {
                     }
                     else if (clickIndex == 2) {
                         if (shuffledEmojis[x] == toMatchImage) {
-                            console.log("trovatpo");
+                            // console.log("trovatpo");
+                            score++
+                            console.log(score);
+
                             clickIndex = 0
                             setTimeout(() => {
                                 singleImage.classList.add("pulse")
@@ -202,9 +205,9 @@ playBtn.addEventListener("click", function () {
                             blockedElements.push(x)
                             blockedElements.push(tempIndex)
                             console.log(blockedElements);
-                            
+
                         }
-                        else{
+                        else {
                             [...allSquares].forEach(element => {
                                 element.classList.add("disabled")
                             });
@@ -214,7 +217,7 @@ playBtn.addEventListener("click", function () {
                             }, 500);
                             setTimeout(() => {
                                 [...allSquares].forEach(element => {
-                                    element.classList.remove("disabled","pulse")
+                                    element.classList.remove("disabled", "pulse")
                                 });
                                 blockedElements.forEach(element => {
                                     allSquares[element].classList.add("disabled")
@@ -224,6 +227,26 @@ playBtn.addEventListener("click", function () {
                                 allSquares[tempIndex].innerHTML = ""
                                 clickIndex = 0
                             }, 600);
+                        }
+                        if (score == (squaresNum / 2)) {
+                            console.log("you won");
+                            gameContainer.innerHTML += `<div id="subliminal">
+                                                          <h1>ASSUMIMI !!</h1>
+                                                        </div>`
+                            let subliminal = document.getElementById("subliminal")
+                            setTimeout(() => {
+                                subliminal.classList.add("grow")
+                            }, 50);
+                            setTimeout(() => {
+                                subliminal.classList.remove("grow")
+                                }, 550);
+                            // gameContainer.innerHTML += `   <div id="win_msg flexed">
+                            //                                    <div>VOLEVO DIRE</div>
+                            //                                    <div>HAI WINTO</div>
+                            //                                    <button id="new_game">
+                            //                                        <div>GIOCA ANCORA</div>
+                            //                                    </button>
+                            //                                </div>`
                         }
                     }
 

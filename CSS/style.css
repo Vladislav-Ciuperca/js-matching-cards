@@ -6,7 +6,7 @@
 }
 
 .container {
-    border: 2px dashed blue;
+    /* border: 2px dashed blue; */
     width: 100vw;
     height: 100vh;
     gap: 5rem;
@@ -37,10 +37,11 @@
 
 button {
     padding: 1rem;
-    width: 5rem;
+    width: 7rem;
     border-radius: 20px;
     margin: 10px;
     cursor: pointer;
+    user-select: none;
 }
 
 #game_container {
@@ -50,6 +51,7 @@ button {
     flex-direction: column;
     gap: 10px;
     border-radius: 20px;
+    position: relative;
 }
 
 
@@ -58,7 +60,6 @@ button {
     transform: scale(0);
     aspect-ratio: 1;
     cursor: pointer;
-    /* font-size: 60px; */
     border-radius: 15px;
     width: 100px;
     transition: .3s;
@@ -66,11 +67,11 @@ button {
     font-size: 0;
 }
 
-.grow{
-    transform: scale(1);
+.grow {
+    transform: scale(1)!important;
 }
 
-.appear{
+.appear {
     font-size: 3.2rem;
     transition: .2s;
 }
@@ -81,17 +82,17 @@ button {
 }
 
 .ez {
-    border: 2px dashed rgb(223, 76, 179);
+    border: 2px solid rgb(223, 76, 179);
     background: rgba(241, 139, 156, 0.5);
 }
 
 .md {
-    border: 2px dashed green;
+    border: 2px solid green;
     background: rgba(0, 128, 0, 0.5);
 }
 
 .hd {
-    border: 2px dashed rgb(255, 39, 39);
+    border: 2px solid rgb(255, 39, 39);
     background: rgba(255, 2, 44, 0.5);
 }
 
@@ -121,20 +122,73 @@ button {
     gap: 12px;
 }
 
-@keyframes pulse{
-    10%{
+@keyframes pulse {
+    10% {
         font-size: 3.2rem;
 
     }
-    50%{
+
+    50% {
         font-size: 3.5rem;
     }
-    100%{
+
+    100% {
         font-size: 3.2rem;
 
     }
 }
 
-.pulse{
+.pulse {
     animation: pulse .5s ease-in-out;
+}
+
+#win_msg {
+    position: absolute;
+    border: 2px solid rgb(211, 211, 211);
+    background: rgba(255, 255, 255, 0.555);
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    font-size: larger;
+    font-weight: 700;
+    transform: scale(0);
+}
+
+.hidden {
+    transform: scale(0);
+}
+
+#new_game {
+    min-width: 10rem;
+    margin-top: 3rem;
+}
+
+#subliminal {
+    background: linear-gradient(90deg,
+            rgba(255, 0, 0, 0.5) 0%,
+            rgba(255, 165, 0, 0.5) 16%,
+            rgba(255, 255, 0, 0.5) 33%,
+            rgba(0, 128, 0, 0.5) 50%,
+            rgba(0, 0, 255, 0.5) 66%,
+            rgba(75, 0, 130, 0.5) 83%,
+            rgba(238, 130, 238, 0.5) 100%);
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: scale(0);
+    transition: .3s;
+}
+
+.hidden{
+    display: none;
 }
