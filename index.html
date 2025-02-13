@@ -8,27 +8,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="CSS/style.css">
+    <link rel="stylesheet" href="CSS/responsive.css">
     <title>Document</title>
 </head>
 
 <body>
     <div class="container flexed">
-        <div class="boxed " id="menu_container">
-            <h2>seleziona una difficilta</h2>
-            <div class="button_container">
-                <button class="diff ez">easy</button>
-                <button class="diff md">medium</button>
-                <button class="diff hd">hard</button>
-            </div>
-            <button id="play">play</button>
-            <div id="notify">
-                <!-- notify placeholder  -->
-            </div>
-        </div>
-        <i id="show_menu" class="fa-solid fa-caret-left shrink"></i>
-        <div class="boxed" id="game_container">
 
+        <!-- menu container -->
+        <div id="menu_container">
+            <div class="boxed menu">
+                <div class="button_container">
+                    <button class="diff ez">easy</button>
+                    <button class="diff md">medium</button>
+                    <button class="diff hd">hard</button>
+                </div>
+                <button id="play">play</button>
+                <div id="notify">
+                    <!-- notify placeholder  -->
+                </div>
+            </div>
+            <i id="hide_menu_btn" class="fa-solid fa-caret-right "></i>
         </div>
+
+        <!-- gamecontainer -->
+        <div class="debug" id="grid_container">
+            <i id="show_menu" class="fa-solid fa-caret-left "></i>
+            <div class="boxed" id="game_container">
+                <!-- placeholder -->
+            </div>
+        </div>
+
+
     </div>
 
 

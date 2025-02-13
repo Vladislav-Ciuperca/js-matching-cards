@@ -1,0 +1,52 @@
+/* 
+
+@media screen and (max-width: 1000px) {
+    
+    .debug{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 2px dashed red;
+    }
+    
+
+}
+
+
+
+
+
+
+
+#game_container {
+    padding: 2rem;
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 20px;
+    position: relative;
+    background: #ffcd71;
+    transform: scale(0);
+    transition: .3s;
+    z-index: 99;
+}
+
+#menu_container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 2px dashed green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .5s;
+}
+
+
+.hide_menu {
+    left: 45rem !important;
+    top: 50% !important;
+    transform: scale(0) !important;
+} */
