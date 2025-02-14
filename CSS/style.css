@@ -194,9 +194,10 @@ button {
     align-items: center;
     position: absolute;
     top: 50%;
-    left: 48.7%;
+    left: 50%;
     transform: translate(-50%, -50%) scale(0);
     transition: .5s;
+    /* 365 */
 }
 
 .grow_grid_small {
@@ -226,10 +227,13 @@ button {
     z-index: 90;
 }
 
-
+/* .line{
+    border: 2px dashed blue;
+    height: 100vh;
+} */
 
 #menu_container {
-    left: 50.9%;
+    left: 50%;
     top: 50%;
     position: absolute;
     transform: translate(-50%, -50%);

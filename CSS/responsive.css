@@ -25,7 +25,7 @@
     }
 
     .show_menu {
-        left: 53% !important;
+        left: 50% !important;
         top: 30% !important;
         transform: translate(-50%, -50%) scale(1) !important;
     }
@@ -75,7 +75,7 @@
 @media screen and (max-width: 550px) {
 
     .grow_grid_small {
-        transform: translate(-50%, -50%) scale(.7) !important;
+        transform: translate(-50%, -50%) scale(.68) !important;
     }
 
     .grow_grid_medium {
@@ -83,7 +83,7 @@
     }
 
     .grow_grid_large {
-        transform: translate(-50%, -50%) scale(.5) !important;
+        transform: translate(-50%, -50%) scale(.52) !important;
     }
 
 }
