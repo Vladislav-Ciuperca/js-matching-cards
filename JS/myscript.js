@@ -308,6 +308,10 @@ playBtn.addEventListener("click", function () {
         }
     } else {
         newGame()
+
+        let screenSize = window.innerWidth
+        console.log(screenSize);
+        
         angryIndex = 0
         playBtn.innerHTML = "new game"
         gridContainer.classList.remove("grow_grid_small","grow_grid_medium","grow_grid_large")
