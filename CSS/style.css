@@ -2,7 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: Geneva, Verdana, sans-serif;
+    font-family: "Cabin", serif;
 }
 
 
@@ -88,7 +88,7 @@ button {
 }
 
 #notify {
-    padding-top: 2rem;
+    padding-bottom: 2rem;
     font-weight: 600;
 }
 
@@ -161,9 +161,10 @@ button {
     transition: .3s;
 }
 
-
-
 .shrink {
+    transform: scale(0) !important;
+}
+.shrink_personal {
     transform: scale(0) !important;
 }
 
@@ -175,31 +176,30 @@ button {
     transform: scale(1)translate(10px) !important;
 }
 
-
 .menu {
-    /* min-height: 20rem; */
     text-align: center;
     background: rgb(224, 224, 224);
     padding: 1.5rem;
+    /* padding-top:0 ; */
     border: 2px solid orange;
     transition: .3s;
     z-index: 1;
     border-radius: 20px;
     transition: .5s ease-in-out;
-    padding-top: 5rem;
+    /* padding-top: 1rem; */
 }
 
-#grid_container{
+#grid_container {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 2px dashed blue;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
     transition: .5s;
 }
+
 /* "" */
 #game_container {
     padding: 2rem;
@@ -216,7 +216,6 @@ button {
 }
 
 #menu_container {
-    border: 2px dashed green;
     left: 51%;
     top: 50%;
     position: absolute;
@@ -228,19 +227,45 @@ button {
 
 }
 
-.hide_menu{
+.hide_menu {
     left: 51%;
     top: 50%;
     transform: translate(-50%, -50%)scale(0) !important;
 }
+
 .show_menu {
     left: 1rem !important;
     top: 50% !important;
-    transform: translate(0, -50%)  scale(1) !important;
+    transform: translate(0, -50%) scale(1) !important;
 }
 
-.move_grid{
-    /* top: 50%;
-    left: 70% !important;
-    transform: translate(-50%, -50%); */
+.shake {
+    animation: shake 0.5s ease-in-out ;
+}
+
+@keyframes shake {
+    0% {
+        transform: translate(5px);
+        color: red;
+    }
+
+    25% {
+        transform: translate(-5px);
+        color: red;
+    }
+
+    50% {
+        transform: translate(5px);
+        color: red;
+    }
+
+    75% {
+        transform: translate(-5px);
+        color: red;
+    }
+
+    100% {
+        transform: translate(0);
+        color: red;
+    }
 }

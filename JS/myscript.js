@@ -42,6 +42,7 @@ let timeoutGeneral = 75;
 let clickIndex = 0
 let toMatchImage = ""
 let tempIndex = 0
+let angryIndex = 0
 
 let score
 let squaresNum
@@ -61,13 +62,21 @@ let hideMenuBtn = document.getElementById("hide_menu_btn");
 //-----// click sulla difficiolat //-----//
 [...diffBtns].forEach(selectDiff => {
     selectDiff.addEventListener("click", function () {
+
         squaresNum = diffLevels[selectDiff.innerHTML];
         animationTimer = activationTime[selectDiff.innerHTML]
         rootNum = Math.sqrt(squaresNum);
-        [...diffBtns].forEach(element => {
-            element.classList.remove("active")
-        });
-        selectDiff.classList.add("active")
+
+        if (selectDiff.classList.contains("active")) {
+            selectDiff.classList.remove("active")
+            squaresNum = NaN
+        }
+        else {
+            [...diffBtns].forEach(element => {
+                element.classList.remove("active")
+            });
+            selectDiff.classList.add("active")
+        }
     })
 });
 
@@ -279,13 +288,25 @@ function newGame() {
 }
 
 
-
 playBtn.addEventListener("click", function () {
+    if (angryIndex == 0) {
+        notify.innerHTML = "SELEZIONA UNA DIFFICOLTA"
+    }
     if (!squaresNum) {
-        notify.innerHTML = "SELEZIOAN UNA DIFFICOLTURA"
+        notify.classList.add("shake")
+        angryIndex++
+        console.log(angryIndex);
+
+        setTimeout(() => {
+            notify.classList.remove("shake")
+        }, 500);
+
+        if (angryIndex == 5) {
+            notify.innerHTML += " >:("
+        }
     } else {
         newGame()
-
+        angryIndex = 0
         playBtn.innerHTML = "new game"
         gridContainer.style.transform = "  translate(-50%, -50%) scale(1)"
         menuContainer.classList.add("hide_menu")
@@ -301,7 +322,7 @@ playBtn.addEventListener("click", function () {
 
 //-----// mostar meuni //-----//
 showMenuBtn.addEventListener("click", function () {
-    showMenuBtn.classList.add("shrink")
+    showMenuBtn.classList.add("shrink_personal")
     menuContainer.classList.remove("hide_menu")
     menuContainer.classList.add("show_menu")
     gridContainer.classList.add("move_grid")
@@ -318,13 +339,6 @@ hideMenuBtn.addEventListener("click", function () {
 
 
 })
-
-// let gridContainer = document.getElementById("grid_container");
-// let gameContainer = document.getElementById("game_container");
-// let menuContainer = document.getElementById("menu_container");
-// let showMenuBtn = document.getElementById("show_menu");
-// let hideMenuBtn = document.getElementById("hide_menu_btn");
-
 
 
 // algpritmo fisher-yates per mescolare array

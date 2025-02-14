@@ -2,6 +2,10 @@
 <html lang="en">
 
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -17,16 +21,14 @@
 
         <!-- menu container -->
         <div id="menu_container">
-            <div class="boxed menu">
+            <div class=" menu">
+                <div id="notify">SELEZIONA UNA DIFFICOLTA</div>
                 <div class="button_container">
                     <button class="diff ez">easy</button>
                     <button class="diff md">medium</button>
                     <button class="diff hd">hard</button>
                 </div>
                 <button id="play">play</button>
-                <div id="notify">
-                    <!-- notify placeholder  -->
-                </div>
             </div>
             <i id="hide_menu_btn" class="fa-solid fa-caret-right shrink"></i>
         </div>
@@ -34,7 +36,7 @@
         <!-- gamecontainer -->
         <div class="debug" id="grid_container">
             <i id="show_menu" class="fa-solid fa-caret-left "></i>
-            <div class="boxed" id="game_container">
+            <div id="game_container">
                 <!-- placeholder -->
             </div>
         </div>
@@ -47,12 +49,3 @@
 <script type="text/javascript" src="JS/myscript.js"></script>
 
 </html>
-
-
-<!-- <div id="win_mess" class="hidden">
-    <div>VOLEVO DIRE</div>
-    <div>HAI WINTO</div>
-    <button id="new_game">
-        <div>GIOCA ANCORA</div>
-    </button>
-</div> -->
