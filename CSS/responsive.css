@@ -72,3 +72,12 @@
     }
 }
 
+@media screen and (max-width: 1020px) {
+
+
+    #grid_container {
+        transform: translate(-50%, -50%) scale(0);
+    }
+
+
+}

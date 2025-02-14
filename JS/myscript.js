@@ -308,7 +308,16 @@ playBtn.addEventListener("click", function () {
         newGame()
         angryIndex = 0
         playBtn.innerHTML = "new game"
-        gridContainer.style.transform = "  translate(-50%, -50%) scale(1)"
+        let screenWidth = window.innerWidth;
+
+        if (screenWidth < 550) {
+            gridContainer.style.transform = "  translate(-50%, -50%) scale(.7)"
+            console.log("asdasdasd");   
+        }
+        else{
+             gridContainer.style.transform = "  translate(-50%, -50%) scale(1)"
+        }
+            console.log("Schermo piccolo");
         menuContainer.classList.add("hide_menu")
         menuContainer.classList.remove("show_menu")
         showMenuBtn.classList.remove("shrink")
