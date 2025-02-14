@@ -1,21 +1,81 @@
-/* 
+@media screen and (max-width: 1450px) {
 
-@media screen and (max-width: 1000px) {
-    
-    .debug{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 2px dashed red;
+    .move_grid {
+        top: 50%;
+        left: 60% !important;
+        transform: translate(-50%, -50%);
     }
-    
+
+}
+
+@media screen and (max-width: 1200px) {
+
+    .move_grid {
+        top: 50%;
+        left: 70% !important;
+        transform: translate(-50%, -50%);
+    }
+
+}
+
+@media screen and (max-width: 1020px) {
+
+    .move_grid {
+        /*  top: 50%; */
+        left: 50% !important;
+        /* transform: translate(-50%, -50%); */
+    }
+
+    .show_menu {
+        left: 53% !important;
+        top: 30% !important;
+        transform: translate(-50%, -50%) scale(1) !important;
+    }
+
+    .fa-caret-left{
+        transform: rotate(90deg) ;
+    }
+
+    .hide_menu {
+        left: 51%;
+        top: -10% !important;
+        transform: translate(-50%, -50%)scale(0) !important;
+    }
+
+    #menu_container {
+        z-index: 99;
+        flex-direction: column-reverse;
+    }
+
+    #grid_container {
+        flex-direction: column;
+        /* transform: translate(-100px, -50%) scale(0); */
+    }
+
+    #hide_menu_btn {
+        transform: rotate(270deg) translate(-10px);
+    }
+
+    button{
+        transform: scale(.9);
+    }
+
+    .move_background{
+        filter: brightness(.6);
+        transform: translate(-49%, -50%) scale(.9) !important;
+    }
+
+    .animate_show {
+        transform: rotate(90deg) translate(-10px) !important ;
+    }
+
 
 }
 
 
 
 
-
+/* 
 
 
 #game_container {

@@ -285,41 +285,46 @@ playBtn.addEventListener("click", function () {
         notify.innerHTML = "SELEZIOAN UNA DIFFICOLTURA"
     } else {
         newGame()
+
         playBtn.innerHTML = "new game"
-        //-----// da qui la logioca dei menu allo start //-----//
-        if (firstCicle) {
-            // menuContainer.classList.add("disappear")
-        }
-        else {
-            menuContainer.classList.add("hide_menu")
-        }
+        gridContainer.style.transform = "  translate(-50%, -50%) scale(1)"
+        menuContainer.classList.add("hide_menu")
+        menuContainer.classList.remove("show_menu")
+        showMenuBtn.classList.remove("shrink")
+        gridContainer.classList.remove("move_background")
         setTimeout(() => {
-            // menuContainer.classList.remove("disappear")
-            menuContainer.style.left = "5rem";
-            // menuContainer.style.transform = " translate(0, -50%)";
-            menuContainer.classList.add("hide_menu")
+            hideMenuBtn.classList.remove("shrink")
         }, 500);
-        firstCicle = false
-        setTimeout(() => {
-            // showMenuBtn.classList.add("show")
-            // showMenuBtn.classList.remove("shrink")
-        }, 20);
+
     }
-})
-
-//-----// nascoiniu meuni //-----//
-hideMenuBtn.addEventListener("click", function () {
-    // showMenuBtn.classList.remove("shrink")
-    // menuContainer.classList.add("shrink")
-
 })
 
 //-----// mostar meuni //-----//
 showMenuBtn.addEventListener("click", function () {
-//     showMenuBtn.classList.add("shrink")
-//     menuContainer.classList.remove("hide_menu", "shrink")
-//     hideMenuBtn.classList.remove("shrink")
+    showMenuBtn.classList.add("shrink")
+    menuContainer.classList.remove("hide_menu")
+    menuContainer.classList.add("show_menu")
+    gridContainer.classList.add("move_grid")
+    gridContainer.classList.add("move_background")
+
 })
+//-----// nascoiniu meuni //-----//
+hideMenuBtn.addEventListener("click", function () {
+    gridContainer.classList.remove("move_background")
+    menuContainer.classList.remove("show_menu")
+    menuContainer.classList.add("hide_menu")
+    showMenuBtn.classList.remove("shrink")
+    gridContainer.classList.remove("move_grid")
+
+
+})
+
+// let gridContainer = document.getElementById("grid_container");
+// let gameContainer = document.getElementById("game_container");
+// let menuContainer = document.getElementById("menu_container");
+// let showMenuBtn = document.getElementById("show_menu");
+// let hideMenuBtn = document.getElementById("hide_menu_btn");
+
 
 
 // algpritmo fisher-yates per mescolare array
