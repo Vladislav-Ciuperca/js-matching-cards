@@ -164,6 +164,7 @@ button {
 .shrink {
     transform: scale(0) !important;
 }
+
 .shrink_personal {
     transform: scale(0) !important;
 }
@@ -180,13 +181,11 @@ button {
     text-align: center;
     background: rgb(224, 224, 224);
     padding: 1.5rem;
-    /* padding-top:0 ; */
     border: 2px solid orange;
     transition: .3s;
     z-index: 1;
     border-radius: 20px;
     transition: .5s ease-in-out;
-    /* padding-top: 1rem; */
 }
 
 #grid_container {
@@ -198,6 +197,20 @@ button {
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
     transition: .5s;
+}
+
+.grow_grid_small {
+    transform: translate(-50%, -50%) scale(1) !important;
+
+}
+
+.grow_grid_medium {
+    transform: translate(-50%, -50%) scale(1) !important;
+
+}
+
+.grow_grid_large {
+    transform: translate(-50%, -50%) scale(1) !important;
 }
 
 /* "" */
@@ -240,7 +253,7 @@ button {
 }
 
 .shake {
-    animation: shake 0.5s ease-in-out ;
+    animation: shake 0.5s ease-in-out;
 }
 
 @keyframes shake {

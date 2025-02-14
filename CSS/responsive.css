@@ -30,8 +30,8 @@
         transform: translate(-50%, -50%) scale(1) !important;
     }
 
-    .fa-caret-left{
-        transform: rotate(90deg) ;
+    .fa-caret-left {
+        transform: rotate(90deg);
     }
 
     .hide_menu {
@@ -53,17 +53,17 @@
         transform: rotate(270deg) translate(-10px);
     }
 
-    button{
+    button {
         transform: scale(.9);
     }
 
-    .move_background{
+    .move_background {
         filter: brightness(.6);
         transform: translate(-49%, -50%) scale(.9) !important;
     }
 
     .animate_show {
-        transform: rotate(90deg) translate(-10px) !important ;
+        transform: rotate(90deg) translate(-10px) !important;
     }
 
 
@@ -72,12 +72,19 @@
     }
 }
 
-@media screen and (max-width: 1020px) {
+@media screen and (max-width: 550px) {
 
-
-    #grid_container {
-        transform: translate(-50%, -50%) scale(0);
+    .grow_grid_small {
+        transform: translate(-50%, -50%) scale(.82) !important;
     }
 
+    .grow_grid_medium {
+        transform: translate(-50%, -50%) scale(.72) !important;
+    }
+
+    .grow_grid_large {
+        transform: translate(-50%, -50%) scale(.62) !important;
+    }
 
 }
+

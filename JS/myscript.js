@@ -76,6 +76,8 @@ let hideMenuBtn = document.getElementById("hide_menu_btn");
                 element.classList.remove("active")
             });
             selectDiff.classList.add("active")
+            console.log(squaresNum);
+
         }
     })
 });
@@ -308,23 +310,31 @@ playBtn.addEventListener("click", function () {
         newGame()
         angryIndex = 0
         playBtn.innerHTML = "new game"
-        let screenWidth = window.innerWidth;
+        gridContainer.classList.remove("grow_grid_small","grow_grid_medium","grow_grid_large")
 
-        if (screenWidth < 550) {
-            gridContainer.style.transform = "  translate(-50%, -50%) scale(.7)"
-            console.log("asdasdasd");   
-        }
-        else{
-             gridContainer.style.transform = "  translate(-50%, -50%) scale(1)"
-        }
-            console.log("Schermo piccolo");
-        menuContainer.classList.add("hide_menu")
-        menuContainer.classList.remove("show_menu")
-        showMenuBtn.classList.remove("shrink")
+        gridContainer.classList.remove("disappear")
+        gridContainer.classList.remove("move_grid")
         gridContainer.classList.remove("move_background")
+
         setTimeout(() => {
-            hideMenuBtn.classList.remove("shrink")
-        }, 500);
+            menuContainer.classList.add("hide_menu")
+            menuContainer.classList.remove("show_menu")
+            showMenuBtn.classList.remove("shrink_personal")
+
+            if (squaresNum == 16) {
+                gridContainer.classList.add("grow_grid_small")
+            }
+            else if (squaresNum == 25) {
+                gridContainer.classList.add("grow_grid_medium")
+            }
+            else if (squaresNum == 36) {
+                gridContainer.classList.add("grow_grid_large")
+            }
+
+            setTimeout(() => {
+                hideMenuBtn.classList.remove("shrink")
+            }, 500);
+        }, 10);
 
     }
 })
@@ -343,7 +353,7 @@ hideMenuBtn.addEventListener("click", function () {
     gridContainer.classList.remove("move_background")
     menuContainer.classList.remove("show_menu")
     menuContainer.classList.add("hide_menu")
-    showMenuBtn.classList.remove("shrink")
+    showMenuBtn.classList.remove("shrink_personal")
     gridContainer.classList.remove("move_grid")
 
 
