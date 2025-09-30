@@ -1,25 +1,20 @@
 @media screen and (max-width: 1450px) {
-
     .move_grid {
         top: 50%;
         left: 60% !important;
         transform: translate(-50%, -50%);
     }
-
 }
 
 @media screen and (max-width: 1200px) {
-
     .move_grid {
         top: 50%;
         left: 70% !important;
         transform: translate(-50%, -50%);
     }
-
 }
 
 @media screen and (max-width: 1020px) {
-
     .move_grid {
         left: 50% !important;
     }
@@ -66,25 +61,19 @@
         transform: rotate(90deg) translate(-10px) !important;
     }
 
-
     .shrink_personal {
         transform: rotate(90deg) translate(-10px) scale(0) !important;
     }
 }
 
 @media screen and (max-width: 550px) {
-
     .grow_grid_small {
         transform: translate(-50%, -50%) scale(.68) !important;
     }
-
     .grow_grid_medium {
         transform: translate(-50%, -50%) scale(.6) !important;
     }
-
     .grow_grid_large {
         transform: translate(-50%, -50%) scale(.52) !important;
     }
-
 }
-
