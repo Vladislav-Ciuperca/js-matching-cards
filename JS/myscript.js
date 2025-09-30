@@ -27,8 +27,8 @@ let growingSquares = [];
 
 let diffLevels = {
     "easy": 16,
-    "medium": 25,
-    "hard": 36,
+    "medium": 36,
+    "hard": 64,
 };
 
 let activationTime = {
