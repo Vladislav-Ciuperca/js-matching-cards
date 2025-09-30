@@ -1,392 +1,119 @@
+// lista emoji
+const arrayEmojis = [
+    "&#128190","&#128640","&#128642","&#128641","&#128509","&#128051",
+    "&#128012","&#128013","&#128022","&#128029","&#128039","&#128060",
+    "&#129430","&#129437","&#129453","&#127843","&#127790","&#127789",
+    "&#127828","&#127829","&#127874","&#127865","&#127867","&#127794",
+    "&#127757","&#127774","&#127918","&#127936","&#127921","&#127928",
+    "&#128081","&#128293","&#128123","&#128169","&#128681"
+];
 
-let arrayEmojis = [
-    "&#128190",//floppy
-    "&#128640",//spaceShip
-    "&#128642",//trenino ciuf ciuf
-    "&#128641",//copter
-    "&#128509",//liberty
-    "&#128051",//fat fish
-    "&#128012",//gipsy slug
-    "&#128013",//snake
-    "&#128022",//bacon
-    "&#128029",//bee :3
-    "&#128039",//pengwing
-    "&#128060",//panda
-    "&#129430",//T-WEX
-    "&#129437",//shifu
-    "&#129453",//seal
-    "&#127843",//shu shi
-    "&#127790",//taco
-    "&#127789",//dog hot
-    "&#127828",//hamburger
-    "&#127829",//pizza
-    "&#127874",//torta
-    "&#127865",//birretta
-    "&#127867",//vino
-    "&#127794",//alberello
-    "&#127757",//globo terraqueo
-    "&#127774",//luna
-    "&#127918",//joystick
-    "&#127936",//pallone da calcio
-    "&#127921",//carte da gioco
-    "&#127928",//chitarra
-    "&#128081",//corona
-    "&#128293",//fuoco
-    "&#128123",//fantasmino
-    "&#128169",//cacca
-    "&#128640",//razzo
-]
-let playingEmojis = []
-let shuffledEmojis = []
-let gameCache = []
-let blockedElements = []
-let growingSquares = [];
+// elementi principali
+const menu = document.getElementById("menu_container");
+const notify = document.getElementById("notify");
+const playBtn = document.getElementById("play");
+const gridContainer = document.getElementById("grid_container");
+const gameContainer = document.getElementById("game_container");
+const hideMenuBtn = document.getElementById("hide_menu_btn");
+const showMenuBtn = document.getElementById("show_menu");
 
-let diffLevels = {
-    "easy": 16,
-    "medium": 36,
-    "hard": 64,
-};
+let selectedDiff = null;
+let flipped = [];
+let lock = false;
 
-let activationTime = {
-    "easy": 300,
-    "medium": 330,
-    "hard": 450,
-}
-
-let firstCicle = true
-let timeoutGeneral = 75;
-let clickIndex = 0
-let toMatchImage = ""
-let tempIndex = 0
-let angryIndex = 0
-
-let score
-let squaresNum
-let rootNum
-let allSquares
-
-let playBtn = document.getElementById("play");
-let notify = document.getElementById("notify");
-let diffBtns = document.getElementsByClassName("diff")
-let gridContainer = document.getElementById("grid_container");
-let gameContainer = document.getElementById("game_container");
-let menuContainer = document.getElementById("menu_container");
-let showMenuBtn = document.getElementById("show_menu");
-let hideMenuBtn = document.getElementById("hide_menu_btn");
-
-
-//-----// click sulla difficiolat //-----//
-[...diffBtns].forEach(selectDiff => {
-    selectDiff.addEventListener("click", function () {
-
-        squaresNum = diffLevels[selectDiff.innerHTML];
-        animationTimer = activationTime[selectDiff.innerHTML]
-        rootNum = Math.sqrt(squaresNum);
-
-        if (selectDiff.classList.contains("active")) {
-            selectDiff.classList.remove("active")
-            squaresNum = NaN
-        }
-        else {
-            [...diffBtns].forEach(element => {
-                element.classList.remove("active")
-            });
-            selectDiff.classList.add("active")
-            console.log(squaresNum);
-
-        }
-    })
+// scelta difficoltà
+document.querySelectorAll(".diff").forEach(btn => {
+    btn.addEventListener("click", () => {
+        document.querySelectorAll(".diff").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        selectedDiff = btn.classList.contains("ez") ? "easy" : btn.classList.contains("md") ? "medium" : "hard";
+    });
 });
 
+// bottone play
+playBtn.addEventListener("click", () => {
+    if (!selectedDiff) {
+        notify.classList.add("shake");
+        setTimeout(() => notify.classList.remove("shake"), 500);
+        return;
+    }
+    menu.classList.add("hide_menu");
+    hideMenuBtn.classList.remove("shrink");
 
+    // genera griglia
+    generateGrid(selectedDiff);
+    gridContainer.classList.remove("disappear");
+    gridContainer.classList.add(selectedDiff === "easy" ? "grow_grid_small" :
+                                 selectedDiff === "medium" ? "grow_grid_medium" : "grow_grid_large");
+});
 
-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-//-///-//-//-//-//-//-//-//
-function newGame() {
-    function clearAllTimers() {
-        let id = setTimeout(() => { }, 0);
-        while (id--) {
-            clearTimeout(id);
-            clearInterval(id);
+// mostra menu di nuovo
+showMenuBtn.addEventListener("click", () => {
+    gridContainer.classList.add("disappear");
+    menu.classList.remove("hide_menu");
+    hideMenuBtn.classList.add("shrink");
+});
+
+// genera il gioco
+function generateGrid(level) {
+    gameContainer.innerHTML = ""; // reset
+    let size = level === "easy" ? 4 : level === "medium" ? 6 : 8;
+    let totalCards = size * size;
+
+    // pesca emoji a coppie
+    let pool = shuffle(arrayEmojis).slice(0, totalCards/2);
+    let cards = shuffle([...pool, ...pool]);
+
+    // crea righe
+    for (let i=0; i<size; i++) {
+        const row = document.createElement("div");
+        row.classList.add("row");
+        for (let j=0; j<size; j++) {
+            const idx = i*size + j;
+            const square = document.createElement("div");
+            square.classList.add("square");
+
+            square.addEventListener("click", () => flipCard(square, cards[idx]));
+            row.appendChild(square);
         }
+        gameContainer.appendChild(row);
     }
-    clearAllTimers()
-
-    gameContainer.classList.add("grow")
-    setInterval(() => {
-        showMenuBtn.classList.add("animate_show")
-        setTimeout(() => {
-            showMenuBtn.classList.remove("animate_show")
-            setTimeout(() => {
-                showMenuBtn.classList.add("animate_show")
-                setTimeout(() => {
-                    showMenuBtn.classList.remove("animate_show")
-                }, 100);
-            }, 100);
-        }, 100);
-    }, 5000);
-    clickIndex = 0
-    gameCache = [];
-    playingEmojis = [];
-    //creo una logica che ad ogni partita, in base alla difficolta , sceglie degli emoji casuali dalla lista
-    for (let y = 0; y < (squaresNum / 2);) {
-        let emojiPicker = Math.floor(Math.random() * arrayEmojis.length)
-        if (!gameCache.includes(emojiPicker)) {
-            gameCache.push(emojiPicker)
-            playingEmojis.push(arrayEmojis[emojiPicker])
-            playingEmojis.push(arrayEmojis[emojiPicker])
-            y++
-        }
-    }
-
-    shuffledEmojis = shuffleArray(playingEmojis)
-    console.log(shuffledEmojis);
-    [...diffBtns].forEach(element => {
-        element.classList.add("disabled")
-    });
-    playBtn.classList.add("disabled")
-    setTimeout(() => {
-        playBtn.classList.remove("disabled");
-        [...diffBtns].forEach(element => {
-            element.classList.remove("disabled")
-        });
-    }, animationTimer * 3);
-
-    growingSquares = []
-    allSquares = []
-    score = 0
-    tempIndex = 0
-    let toMatchImage = ""
-    blockedElements = []
-    gameContainer.innerHTML = ""
-    gameContainer.style.width = `calc(400px + (400px * 0.${squaresNum} * 2))`
-    // creo un numero di raws pari alla RQ del totali sei SQ
-    for (let i = 0; i < rootNum; i++) {
-        gameContainer.innerHTML += `<div class="row"></div>`
-    }
-    // creo la fuzione che popola ogni singola row una alla votla
-    function getGameGrid(rowIndex, start, root) {
-        let rows = document.getElementsByClassName("row")
-        let targetRow = rows[rowIndex]
-
-        let end = start + root
-
-        //-----// qua creo la griglia di gioco //-----//
-        function getSquare() {
-            if (start < end) {
-                //-----// qua creo le caselle //-----//
-                targetRow.innerHTML += `<div class="square flexed disabled" 
-                    style="width: calc(100% / ${rootNum} - 10px);">${shuffledEmojis[start - 1]}</div>`
-                growingSquares.push(start)
-                start++
-
-                //-----// qua animo gli squares //-----//
-                allSquares = document.getElementsByClassName("square")
-                setTimeout(() => {
-                    for (let n = 0; n < growingSquares.length; n++) {
-                        setTimeout(() => {
-                            allSquares[growingSquares[n] - 1].classList.add("grow")
-                        }, animationTimer)
-                    }
-                }, timeoutGeneral);
-            }
-            setTimeout(getSquare, timeoutGeneral)
-        }
-        getSquare()
-    }
-    setTimeout(() => {
-        [...allSquares].forEach(element => {
-            element.classList.add("appear")
-        });
-    }, 1100 + (squaresNum * 10));
-
-    setTimeout(() => {
-        [...allSquares].forEach(element => {
-            element.classList.remove("appear")
-        });
-    }, 3000);
-
-    // funzione gameLogic
-    function gameLogic(singleImage, x) {
-        singleImage.classList.add("disabled", "appear");
-        singleImage.innerHTML = shuffledEmojis[x];
-        clickIndex++;
-
-        if (clickIndex == 1) {
-            toMatchImage = shuffledEmojis[x];
-            tempIndex = x;
-        } else if (clickIndex == 2) {
-            if (shuffledEmojis[x] == toMatchImage) {
-                score++;
-                console.log(score);
-
-                clickIndex = 0;
-                setTimeout(() => {
-                    singleImage.classList.add("pulse");
-                    allSquares[tempIndex].classList.add("pulse");
-                }, 100);
-                setTimeout(() => {
-                    singleImage.classList.remove("pulse");
-                    allSquares[tempIndex].classList.remove("pulse");
-                }, 400);
-
-                blockedElements.push(x);
-                blockedElements.push(tempIndex);
-                console.log(blockedElements);
-            } else {
-                [...allSquares].forEach(element => {
-                    element.classList.add("disabled");
-                });
-                setTimeout(() => {
-                    singleImage.classList.remove("appear");
-                    allSquares[tempIndex].classList.remove("appear");
-                }, 500);
-                setTimeout(() => {
-                    [...allSquares].forEach(element => {
-                        element.classList.remove("disabled", "pulse");
-                    });
-                    blockedElements.forEach(element => {
-                        allSquares[element].classList.add("disabled");
-                    });
-                    allSquares[tempIndex].classList.remove("disabled");
-                    singleImage.innerHTML = "";
-                    allSquares[tempIndex].innerHTML = "";
-                    clickIndex = 0;
-                }, 600);
-            }
-
-            if (score == (squaresNum / 2)) {
-                console.log("you won");
-                gameContainer.innerHTML += `
-                <div id="subliminal">
-                    <h1>ASSUMETEMI !!</h1>
-                </div>
-                <div id="win_mess" class="disappear">
-                    <div>VOLEVO DIRE</div>
-                    <div>HAI WINTO</div>
-                    <button id="replay">
-                        <div>GIOCA ANCORA</div>
-                    </button>
-                </div>`;
-                let subliminal = document.getElementById("subliminal");
-                let winMsg = document.getElementById("win_mess");
-                let replay = document.getElementById("replay");
-                setTimeout(() => {
-                    subliminal.classList.add("grow");
-                }, 50);
-                setTimeout(() => {
-                    subliminal.classList.add("disappear");
-                    winMsg.classList.remove("disappear");
-                    setTimeout(() => {
-                        winMsg.classList.add("grow");
-                        replay.addEventListener("click", newGame)
-                    }, 50);
-                }, 500);
-            }
-        }
-    }
-
-    setTimeout(() => {
-        [...allSquares].forEach((singleImage, x) => {
-            singleImage.classList.remove("disabled");
-            singleImage.innerHTML = "";
-
-            singleImage.addEventListener("click", function () {
-                gameLogic(singleImage, x);
-            });
-        });
-    }, 3300);
-
-    //////////////////////////////////////////////////////////////////
-    for (let x = 0; x < rootNum; x++) {
-        setTimeout(() => {
-            getGameGrid(x, 1 + (x * rootNum), rootNum)
-        }, x * timeoutGeneral);
-    }
-
 }
 
+// gira carta
+function flipCard(square, emoji) {
+    if (lock || square.classList.contains("disabled")) return;
 
-playBtn.addEventListener("click", function () {
-    if (angryIndex == 0) {
-        notify.innerHTML = "SELEZIONA UNA DIFFICOLTA"
-    }
-    if (!squaresNum) {
-        notify.classList.add("shake")
-        angryIndex++
-        console.log(angryIndex);
+    square.innerHTML = emoji;
+    square.classList.add("grow","appear");
+    flipped.push(square);
 
-        setTimeout(() => {
-            notify.classList.remove("shake")
-        }, 500);
-
-        if (angryIndex == 5) {
-            notify.innerHTML += " >:("
-        }
-    } else {
-        newGame()
-
-        let screenSize = window.innerWidth
-        console.log(screenSize);
-        
-        angryIndex = 0
-        playBtn.innerHTML = "new game"
-        gridContainer.classList.remove("grow_grid_small","grow_grid_medium","grow_grid_large")
-
-        gridContainer.classList.remove("disappear")
-        gridContainer.classList.remove("move_grid")
-        gridContainer.classList.remove("move_background")
-
-        setTimeout(() => {
-            menuContainer.classList.add("hide_menu")
-            menuContainer.classList.remove("show_menu")
-            showMenuBtn.classList.remove("shrink_personal")
-
-            if (squaresNum == 16) {
-                gridContainer.classList.add("grow_grid_small")
-            }
-            else if (squaresNum == 25) {
-                gridContainer.classList.add("grow_grid_medium")
-            }
-            else if (squaresNum == 36) {
-                gridContainer.classList.add("grow_grid_large")
-            }
-
+    if (flipped.length === 2) {
+        lock = true;
+        let [a, b] = flipped;
+        if (a.innerHTML === b.innerHTML) {
+            a.classList.add("disabled");
+            b.classList.add("disabled");
+            resetFlip();
+        } else {
             setTimeout(() => {
-                hideMenuBtn.classList.remove("shrink")
-            }, 500);
-        }, 10);
-
+                a.innerHTML = "";
+                b.innerHTML = "";
+                a.classList.remove("appear","grow");
+                b.classList.remove("appear","grow");
+                resetFlip();
+            }, 800);
+        }
     }
-})
-
-//-----// mostar meuni //-----//
-showMenuBtn.addEventListener("click", function () {
-    showMenuBtn.classList.add("shrink_personal")
-    menuContainer.classList.remove("hide_menu")
-    menuContainer.classList.add("show_menu")
-    gridContainer.classList.add("move_grid")
-    gridContainer.classList.add("move_background")
-
-})
-//-----// nascoiniu meuni //-----//
-hideMenuBtn.addEventListener("click", function () {
-    gridContainer.classList.remove("move_background")
-    menuContainer.classList.remove("show_menu")
-    menuContainer.classList.add("hide_menu")
-    showMenuBtn.classList.remove("shrink_personal")
-    gridContainer.classList.remove("move_grid")
-
-
-})
-
-
-// algpritmo fisher-yates per mescolare array
-function shuffleArray(arr) {
-    for (let i = arr.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1)); // Indice casuale tra 0 e i
-        [arr[i], arr[j]] = [arr[j], arr[i]]; // Scambia gli elementi
-    }
-    return arr;
 }
 
+// reset array girate
+function resetFlip() {
+    flipped = [];
+    lock = false;
+}
+
+// shuffle array
+function shuffle(arr) {
+    return arr.sort(() => Math.random() - 0.5);
+}
