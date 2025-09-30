@@ -1,3 +1,4 @@
+/* reset base */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -5,8 +6,7 @@
     font-family: "Cabin", serif;
 }
 
-
-
+/* contenitore principale */
 .container {
     width: 100vw;
     height: 100vh;
@@ -20,11 +20,6 @@
     align-items: center;
 }
 
-
-h2 {
-    padding-bottom: 2rem;
-}
-
 button {
     padding: 1rem;
     width: 6rem;
@@ -34,10 +29,10 @@ button {
     user-select: none;
 }
 
-
+/* carta singola */
 .square {
-    border: 2px solid orange;
-    background: white;
+    border: 2px solid #999;
+    background: #fff;
     transform: scale(0);
     aspect-ratio: 1;
     cursor: pointer;
@@ -59,29 +54,28 @@ button {
 
 .disabled {
     pointer-events: none;
-    cursor: pointer;
 }
 
+/* bottoni difficoltà */
 .ez {
-    border: 2px solid rgb(223, 76, 179);
-    background: rgba(241, 139, 156, 0.5);
+    border: 2px solid #77baff;
+    background: rgba(119, 186, 255, 0.4);
 }
 
 .md {
-    border: 2px solid green;
-    background: rgba(0, 128, 0, 0.5);
+    border: 2px solid #6abf69;
+    background: rgba(106, 191, 105, 0.4);
 }
 
 .hd {
-    border: 2px solid rgb(255, 39, 39);
-    background: rgba(255, 2, 44, 0.5);
+    border: 2px solid #d9534f;
+    background: rgba(217, 83, 79, 0.4);
 }
 
 .diff {
-    filter: brightness(.5);
-    transition: .5s;
+    filter: brightness(.6);
+    transition: .3s;
 }
-
 
 .active {
     filter: brightness(1);
@@ -92,71 +86,11 @@ button {
     font-weight: 600;
 }
 
-.row {
-    display: flex;
-    justify-items: start;
-    gap: 12px;
-}
-
-.pulse {
-    font-size: 3.5rem;
-}
-
-#new_game {
-    min-width: 10rem;
-    margin-top: 3rem;
-}
-
-#subliminal {
-    background: linear-gradient(90deg,
-            rgba(255, 0, 0, 0.5) 0%,
-            rgba(255, 165, 0, 0.5) 16%,
-            rgba(255, 255, 0, 0.5) 33%,
-            rgba(0, 128, 0, 0.5) 50%,
-            rgba(0, 0, 255, 0.5) 66%,
-            rgba(75, 0, 130, 0.5) 83%,
-            rgba(238, 130, 238, 0.5) 100%);
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transform: scale(0);
-    transition: .3s;
-}
-
-.disappear {
-    display: none !important;
-}
-
-#win_mess {
-    position: absolute;
-    background: rgba(255, 255, 255, 0.555);
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-size: larger;
-    font-weight: 700;
-    transform: scale(0);
-    transition: .5s;
-}
-
-
+/* caret icone */
 .fa-caret-left,
-.fa-caret-up,
 .fa-caret-right {
     font-size: 4rem;
-    color: #fcc45d;
+    color: #888;
     cursor: pointer;
     transition: .3s;
 }
@@ -165,29 +99,18 @@ button {
     transform: scale(0) !important;
 }
 
-.shrink_personal {
-    transform: scale(0) !important;
-}
-
-.show {
-    transform: scale(1);
-}
-
-.animate_show {
-    transform: scale(1)translate(10px) !important;
-}
-
+/* menu box */
 .menu {
     text-align: center;
-    background: rgb(224, 224, 224);
+    background: #e0e0e0;
     padding: 1.5rem;
-    border: 2px solid orange;
-    transition: .3s;
-    z-index: 1;
+    border: 2px solid #aaa;
     border-radius: 20px;
     transition: .5s ease-in-out;
+    z-index: 1;
 }
 
+/* griglia invisibile all’inizio */
 #grid_container {
     display: flex;
     justify-content: center;
@@ -197,22 +120,15 @@ button {
     left: 50%;
     transform: translate(-50%, -50%) scale(0);
     transition: .5s;
-    /* 365 */
 }
 
-.grow_grid_small {
-    transform: translate(-50%, -50%) scale(1) !important;
-}
-
-.grow_grid_medium {
-    transform: translate(-50%, -50%) scale(1) !important;
-}
-
+.grow_grid_small,
+.grow_grid_medium,
 .grow_grid_large {
     transform: translate(-50%, -50%) scale(1) !important;
 }
 
-/* "" */
+/* box che contiene le carte */
 #game_container {
     padding: 2rem;
     aspect-ratio: 1;
@@ -221,68 +137,18 @@ button {
     gap: 10px;
     border-radius: 20px;
     position: relative;
-    background: #ffcd71;
+    background: #dcdcdc;
     transform: scale(0);
     transition: .3s;
     z-index: 90;
 }
 
-/* .line{
-    border: 2px dashed blue;
-    height: 100vh;
-} */
-
-#menu_container {
-    left: 50%;
-    top: 50%;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: .5s;
-
-}
-
-.hide_menu {
-    left: 51%;
-    top: 50%;
-    transform: translate(-50%, -50%)scale(0) !important;
-}
-
-.show_menu {
-    left: 1rem !important;
-    top: 50% !important;
-    transform: translate(0, -50%) scale(1) !important;
-}
-
+/* animazione shake quando non selezioni diff */
 .shake {
     animation: shake 0.5s ease-in-out;
 }
 
 @keyframes shake {
-    0% {
-        transform: translate(5px);
-        color: red;
-    }
-
-    25% {
-        transform: translate(-5px);
-        color: red;
-    }
-
+    0% { transform: translate(5px); color: red; }
+    25% { transform: translate(-5px); color: red; }
     50% {
-        transform: translate(5px);
-        color: red;
-    }
-
-    75% {
-        transform: translate(-5px);
-        color: red;
-    }
-
-    100% {
-        transform: translate(0);
-        color: red;
-    }
-}
