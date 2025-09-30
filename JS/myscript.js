@@ -18,6 +18,23 @@ let arrayEmojis = [
     "&#127843",//shu shi
     "&#127790",//taco
     "&#127789",//dog hot
+    "&#127828",//hamburger
+    "&#127829",//pizza
+    "&#127874",//torta
+    "&#127865",//birretta
+    "&#127867",//vino
+    "&#127794",//alberello
+    "&#127757",//globo terraqueo
+    "&#127774",//luna
+    "&#127918",//joystick
+    "&#127936",//pallone da calcio
+    "&#127921",//carte da gioco
+    "&#127928",//chitarra
+    "&#128081",//corona
+    "&#128293",//fuoco
+    "&#128123",//fantasmino
+    "&#128169",//cacca
+    "&#128640",//razzo
 ]
 let playingEmojis = []
 let shuffledEmojis = []
