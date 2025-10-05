@@ -1,39 +1,41 @@
+
 let arrayEmojis = [
-    "&#128190",//floppy
-    "&#128640",//spaceShip
-    "&#128642",//trenino ciuf ciuf
-    "&#128641",//copter
-    "&#128509",//liberty
-    "&#128051",//fat fish
-    "&#128012",//gipsy slug
-    "&#128013",//snake
-    "&#128022",//bacon
-    "&#128029",//bee :3
-    "&#128039",//pengwing
-    "&#128060",//panda
-    "&#129430",//T-WEX
-    "&#129437",//shifu
-    "&#129453",//seal
-    "&#127843",//shu shi
-    "&#127790",//taco
-    "&#127789",//dog hot
-    "&#127828",//hamburger
-    "&#127829",//pizza
-    "&#127874",//torta
-    "&#127865",//birretta
-    "&#127867",//vino
-    "&#127794",//alberello
-    "&#127757",//globo terraqueo
-    "&#127774",//luna
-    "&#127918",//joystick
-    "&#127936",//pallone da calcio
-    "&#127921",//carte da gioco
-    "&#127928",//chitarra
-    "&#128081",//corona
-    "&#128293",//fuoco
-    "&#128123",//fantasmino
-    "&#128169",//cacca
-    "&#128640",//razzo
+    "&#128190;",//floppy
+    "&#128640;",//spaceShip
+    "&#128642;",//trenino ciuf ciuf
+    "&#128641;",//copter
+    "&#128509;",//liberty
+    "&#128051;",//fat fish
+    "&#128012;",//gipsy slug
+    "&#128013;",//snake
+    "&#128022;",//bacon
+    "&#128029;",//bee :3
+    "&#128039;",//pengwing
+    "&#128060;",//panda
+    "&#129430;",//T-WEX
+    "&#129437;",//shifu
+    "&#129453;",//seal
+    "&#127843;",//shu shi
+    "&#127790;",//taco
+    "&#127789;",//dog hot
+    "&#128187;",//computer
+    "&#128241;",//telefono
+    "&#127918;",//joystick
+    "&#127911;",//cuffie
+    "&#127752;",//arcobaleno
+    "&#127880;",//party popper
+    "&#127775;",//stella brillante
+    "&#127869;",//posate
+    "&#129365;",//pizza
+    "&#129381;",//hamburger
+    "&#127854;",//torta
+    "&#9749;",  //caffè
+    "&#127795;",//albero
+    "&#127803;",//fiore
+    "&#127754;",//onda
+    "&#128663;",//automobile
+    "&#9992;",  //aereo
+    "&#128081;",//corona
 ]
 let playingEmojis = []
 let shuffledEmojis = []
@@ -54,7 +56,7 @@ let activationTime = {
 }
 
 let firstCicle = true
-let timeoutGeneral = 75;
+let timeoutGeneral = 50;
 let clickIndex = 0
 let toMatchImage = ""
 let tempIndex = 0
@@ -127,19 +129,41 @@ function newGame() {
     clickIndex = 0
     gameCache = [];
     playingEmojis = [];
+
+
     //creo una logica che ad ogni partita, in base alla difficolta , sceglie degli emoji casuali dalla lista
+
+
+
+    //qua in sostanza prendo tanti emojis quanto la meta dei quadrati di GeolocationCoordinates, essendo le emopji in coppia
     for (let y = 0; y < (squaresNum / 2);) {
+        console.log(y + 1);
+        //defionisco emojiPicker, un nuymero random da 0 alla lunghezza dellk array di emoji
         let emojiPicker = Math.floor(Math.random() * arrayEmojis.length)
+
+        // contorillo che il numero di emojipicker non sia gia stato preso
         if (!gameCache.includes(emojiPicker)) {
             gameCache.push(emojiPicker)
+            console.log(gameCache);
+
+            // pusho kla emoji da ciocare nell array delle emoji 2 volte
             playingEmojis.push(arrayEmojis[emojiPicker])
             playingEmojis.push(arrayEmojis[emojiPicker])
+            console.log(playingEmojis);
+
+            // salgo l'index
             y++
+
+            console.log("index sale a ", y);
+
+
         }
     }
 
+    // mischio l'array delle emoji con la funzione che ho creaTO APPOSTA
     shuffledEmojis = shuffleArray(playingEmojis)
     console.log(shuffledEmojis);
+    // logica de la selezione dlela difficolta
     [...diffBtns].forEach(element => {
         element.classList.add("disabled")
     });
@@ -151,6 +175,7 @@ function newGame() {
         });
     }, animationTimer * 3);
 
+    // azzero tutte le variabili di gioco che ho definito sopra
     growingSquares = []
     allSquares = []
     score = 0
@@ -158,11 +183,14 @@ function newGame() {
     let toMatchImage = ""
     blockedElements = []
     gameContainer.innerHTML = ""
+
+    // imposto la grandezza della griglia di gioco
     gameContainer.style.width = `calc(400px + (400px * 0.${squaresNum} * 2))`
-    // creo un numero di raws pari alla RQ del totali sei SQ
+    // creo un numero di raws pari alla RQ del totali dei qauyadrati
     for (let i = 0; i < rootNum; i++) {
         gameContainer.innerHTML += `<div class="row"></div>`
     }
+
     // creo la fuzione che popola ogni singola row una alla votla
     function getGameGrid(rowIndex, start, root) {
         let rows = document.getElementsByClassName("row")
@@ -182,9 +210,13 @@ function newGame() {
                 //-----// qua animo gli squares //-----//
                 allSquares = document.getElementsByClassName("square")
                 setTimeout(() => {
+                    console.log("tutti i quadrati", allSquares.length);
+                    console.log("quadrati da crescere", growingSquares.length);
                     for (let n = 0; n < growingSquares.length; n++) {
                         setTimeout(() => {
                             allSquares[growingSquares[n] - 1].classList.add("grow")
+                            // log di debug
+
                         }, animationTimer)
                     }
                 }, timeoutGeneral);
@@ -327,10 +359,10 @@ playBtn.addEventListener("click", function () {
 
         let screenSize = window.innerWidth
         console.log(screenSize);
-        
+
         angryIndex = 0
         playBtn.innerHTML = "new game"
-        gridContainer.classList.remove("grow_grid_small","grow_grid_medium","grow_grid_large")
+        gridContainer.classList.remove("grow_grid_small", "grow_grid_medium", "grow_grid_large")
 
         gridContainer.classList.remove("disappear")
         gridContainer.classList.remove("move_grid")
@@ -344,10 +376,10 @@ playBtn.addEventListener("click", function () {
             if (squaresNum == 16) {
                 gridContainer.classList.add("grow_grid_small")
             }
-            else if (squaresNum == 25) {
+            else if (squaresNum == 36) {
                 gridContainer.classList.add("grow_grid_medium")
             }
-            else if (squaresNum == 36) {
+            else if (squaresNum == 64) {
                 gridContainer.classList.add("grow_grid_large")
             }
 
@@ -388,3 +420,4 @@ function shuffleArray(arr) {
     }
     return arr;
 }
+

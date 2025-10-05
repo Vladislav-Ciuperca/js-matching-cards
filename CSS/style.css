@@ -36,7 +36,7 @@ button {
 
 
 .square {
-    border: 2px solid #888; /* prima era orange, ora grigio neutro */
+    border: 2px solid orange;
     background: white;
     transform: scale(0);
     aspect-ratio: 1;
@@ -62,7 +62,6 @@ button {
     cursor: pointer;
 }
 
-/* colori difficoltà: li lascio così come li avevi (colore distintivo per ogni diff) */
 .ez {
     border: 2px solid rgb(223, 76, 179);
     background: rgba(241, 139, 156, 0.5);
@@ -108,16 +107,15 @@ button {
     margin-top: 3rem;
 }
 
-/* gradient modificato in scala di grigi */
 #subliminal {
     background: linear-gradient(90deg,
-            rgba(120, 120, 120, 0.5) 0%,
-            rgba(160, 160, 160, 0.5) 16%,
-            rgba(200, 200, 200, 0.5) 33%,
-            rgba(220, 220, 220, 0.5) 50%,
-            rgba(180, 180, 180, 0.5) 66%,
-            rgba(140, 140, 140, 0.5) 83%,
-            rgba(100, 100, 100, 0.5) 100%);
+            rgba(255, 0, 0, 0.5) 0%,
+            rgba(255, 165, 0, 0.5) 16%,
+            rgba(255, 255, 0, 0.5) 33%,
+            rgba(0, 128, 0, 0.5) 50%,
+            rgba(0, 0, 255, 0.5) 66%,
+            rgba(75, 0, 130, 0.5) 83%,
+            rgba(238, 130, 238, 0.5) 100%);
     height: 100%;
     width: 100%;
     position: absolute;
@@ -154,12 +152,11 @@ button {
 }
 
 
-/* caret/icone: colore neutro (prima #fcc45d) */
 .fa-caret-left,
 .fa-caret-up,
 .fa-caret-right {
     font-size: 4rem;
-    color: #888;
+    color: #fcc45d;
     cursor: pointer;
     transition: .3s;
 }
@@ -180,12 +177,11 @@ button {
     transform: scale(1)translate(10px) !important;
 }
 
-/* menu: border cambiato da orange a grigio */
 .menu {
     text-align: center;
     background: rgb(224, 224, 224);
     padding: 1.5rem;
-    border: 2px solid #aaa; /* prima era orange */
+    border: 2px solid orange;
     transition: .3s;
     z-index: 1;
     border-radius: 20px;
@@ -199,7 +195,7 @@ button {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) scale(0); /* il container parte invisibile */
+    transform: translate(-50%, -50%) scale(0);
     transition: .5s;
     /* 365 */
 }
@@ -225,7 +221,7 @@ button {
     gap: 10px;
     border-radius: 20px;
     position: relative;
-    background: #dcdcdc; /* prima #ffcd71, ora grigio chiaro */
+    background: #ffcd71;
     transform: scale(0);
     transition: .3s;
     z-index: 90;
